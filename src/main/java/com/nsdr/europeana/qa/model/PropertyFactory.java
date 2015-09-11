@@ -42,15 +42,17 @@ class PropertyFactory {
 	private static String resolveTypeAbbreviation(String abbreviation) {
 		String type;
 		switch (abbreviation) {
-			case "B": type = "BOOLEAN"; break;
-			case "N": type = "NUMBER"; break;
+			case "B":  type = "BOOLEAN"; break;
+			case "I":  type = "INTEGER"; break;
+			case "L":  type = "LONG"; break;
+			case "F":  type = "FLOAT"; break;
+			case "D":  type = "DOUBLE"; break;
 			case "SL": type = "STRINGLIST"; break;
-			case "O": type = "OBJECT"; break;
+			case "O":  type = "OBJECT"; break;
 			case "OL": type = "OBJECTLIST"; break;
 			case "LM": type = "LANGUAGEMAP"; break;
 			case "S":
-			default:
-				type = "STRING"; break;
+			default:   type = "STRING"; break;
 		}
 		return type;
 	}

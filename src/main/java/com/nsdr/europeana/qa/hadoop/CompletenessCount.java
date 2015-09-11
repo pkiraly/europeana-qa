@@ -65,45 +65,8 @@ public class CompletenessCount {
 
 			if (record != null) {
 				String id = (String) record.get("about");
-				CompletenessCounter counter = new CompletenessCounter();
+				CompletenessCounter counter = new CompletenessCounter(id);
 				counter.count(record, root);
-				/*
-				float hasProp = 0.0f;
-				float propTotal = (float) properties.size();
-				for (String property : properties) {
-					String propType = null;
-					if (property.contains(":")) {
-						String[] parts = property.split(":");
-						property = parts[0];
-						propType = parts[1];
-					}
-					if (propType != null) {
-						if ("AS".equals(propType)) {
-							List<String> fields = (List<String>) record.get(property);
-							if (fields != null) {
-								propTotal -= 1.0f;
-								for (String field : fields) {
-									propTotal += 1.0f;
-									if (field != null && !"".equals(field.trim())) {
-										hasProp += 1.0f;
-									}
-								}
-							}
-						}
-					} else {
-						Object field = record.get(property);
-						if (field != null) {
-							hasProp += 1.0f;
-						}
-					}
-				}
-				*/
-				/*
-				 String type = (String) record.get("type");
-				 List<String> edmDatasetName = (List<String>) record.get("edmDatasetName");
-				 int europeanaCompleteness = (int) record.get("europeanaCompleteness");
-				 boolean hasCompleteness = record.containsKey("europeanaCompleteness");
-				 */
 				context.write(new Text(id), new FloatWritable(counter.getResult()));
 			} else {
 				System.err.println("record length: " + value.toString().length());

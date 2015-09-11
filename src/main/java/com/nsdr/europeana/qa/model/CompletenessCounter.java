@@ -5,27 +5,43 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
- *
+ * TODO
+ * - multiple instances: fraction numbers
+ * - duplicated values
+ * - boolean fields: 
+ * -- has duplicated values
+ * -- has empty value
+ * - test
  * @author Péter Király <peter.kiraly at gwdg.de>
  */
 public class CompletenessCounter {
-	int total = 0;
-	int met = 0;
+	private int total = 0;
+	private int met = 0;
+	private String recordID;
 
-	public CompletenessCounter() {}
+	public CompletenessCounter(String recordID) {
+		this.recordID = recordID;
+	}
 
 	public void count(Map<String, Object> json, Property property) {
 		for (Property child : property.getChildren()) {
 			if (child.getType().equals(Property.TYPE.STRING)) {
 				countString(json, child);
-			} else if (child.getType().equals(Property.TYPE.NUMBER)) {
-				countString(json, child);
+			} else if (child.getType().equals(Property.TYPE.INTEGER)) {
+				countInteger(json, child);
+			} else if (child.getType().equals(Property.TYPE.LONG)) {
+				countLong(json, child);
+			} else if (child.getType().equals(Property.TYPE.FLOAT)) {
+				countFloat(json, child);
+			} else if (child.getType().equals(Property.TYPE.DOUBLE)) {
+				countDouble(json, child);
 			} else if (child.getType().equals(Property.TYPE.BOOLEAN)) {
-				countString(json, child);
+				countBoolean(json, child);
 			} else if (child.getType().equals(Property.TYPE.STRINGLIST)) {
 				countListOfStrings(json, child);
 			} else if (child.getType().equals(Property.TYPE.OBJECT)) {
-				// count((Map<String, Object>)json.get(child.getName()), child);
+				total++;
+				count((Map<String, Object>)json.get(child.getName()), child);
 			} else if (child.getType().equals(Property.TYPE.OBJECTLIST)) {
 				countListOfObjects(json, child);
 			} else if (child.getType().equals(Property.TYPE.LANGUAGEMAP)) {
@@ -43,6 +59,71 @@ public class CompletenessCounter {
 		if (json.containsKey(property.getName())) {
 			String value = (String) json.get(property.getName());
 			if (StringUtils.isNotBlank(value))
+					met++;
+		}
+	}
+
+	private void countInteger(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			try {
+				Integer value = (Integer) json.get(property.getName());
+				if (value != null)
+					met++;
+			} catch (Exception e) {
+				System.err.println(recordID + ") number: " + property.getName() + ", " + json.get(property.getName()));
+				throw e;
+			}
+		}
+	}
+
+	private void countFloat(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			Float value = (Float) json.get(property.getName());
+			if (value != null)
+					met++;
+		}
+	}
+
+	private void countLong(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			Object t = json.get(property.getName());
+			Long value;
+			if (t instanceof Long)
+				value = (Long) t;
+			else
+				value = Long.valueOf((Integer)t);
+			//Long value = (Long) json.get(property.getName());
+			if (value != null)
+					met++;
+		}
+	}
+
+	private void countDouble(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			try {
+				Double value = null;
+				if (json.get(property.getName()) instanceof Double)
+					value = (Double)json.get(property.getName());
+				else if (json.get(property.getName()) instanceof Integer)
+					value = Double.valueOf((Integer)json.get(property.getName()));
+				if (value != null)
+					met++;
+			} catch (Exception e) {
+				System.err.println(recordID + ") countDouble: " + property.getName() + ", " + json.get(property.getName()));
+				throw e;
+			}
+		}
+	}
+
+	private void countBoolean(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			Boolean value = (Boolean) json.get(property.getName());
+			if (value != null)
 					met++;
 		}
 	}

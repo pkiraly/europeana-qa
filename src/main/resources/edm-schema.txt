@@ -4,10 +4,10 @@ root/agents:OL
 root/aggregations:OL
 root/concepts:OL
 root/country:SL
-root/europeanaAggregation:OL
+root/europeanaAggregation:O
 root/europeanaCollectionName:SL
 root/edmDatasetName:SL
-root/europeanaCompleteness:N
+root/europeanaCompleteness:I
 root/language:SL
 root/optOut:B
 root/places:OL
@@ -16,9 +16,9 @@ root/providedCHOs:OL
 root/proxies:OL
 root/timespans:OL
 root/timestamp_created:S
-root/timestamp_created_epoch:N
+root/timestamp_created_epoch:L
 root/timestamp_update:S
-root/timestamp_update_epoch:N
+root/timestamp_update_epoch:L
 root/title:SL
 root/type:S
 root/year:SL
@@ -112,9 +112,9 @@ places/altLabel:LM
 places/hiddenLabel:LM
 places/note:LM
 places/isPartOf:LM
-places/latitude:N
-places/longitude:N
-places/altitude:N
+places/latitude:D
+places/longitude:D
+places/altitude:D
 places/position:O
 places/dcTermsHasPart:LM
 places/owlSameAs:SL
