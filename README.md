@@ -56,4 +56,4 @@ The result is something like that:
     /08517/059685786EB66D46FA766A0AD990541ABC27BA6F	0.6047904
     /08517/0634E70E8EF52D0D371D24BD1007E422B5875A23	0.25786164
 
-which is an ID, double floating point result of the "completeness" metric in the range of 0 and 1.
+which is pair of Europeana ID and a double floating point result of the "completeness" metric in the range of 0 and 1.
