@@ -43,6 +43,7 @@ class PropertyFactory {
 		String type;
 		switch (abbreviation) {
 			case "B":  type = "BOOLEAN"; break;
+			case "BL": type = "BOOLEANLIST"; break;
 			case "I":  type = "INTEGER"; break;
 			case "L":  type = "LONG"; break;
 			case "F":  type = "FLOAT"; break;
@@ -51,6 +52,7 @@ class PropertyFactory {
 			case "O":  type = "OBJECT"; break;
 			case "OL": type = "OBJECTLIST"; break;
 			case "LM": type = "LANGUAGEMAP"; break;
+			case "LML":type = "LANGUAGEMAPLIST"; break;
 			case "S":
 			default:   type = "STRING"; break;
 		}

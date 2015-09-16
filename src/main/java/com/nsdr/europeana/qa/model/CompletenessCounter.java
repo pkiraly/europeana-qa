@@ -44,8 +44,12 @@ public class CompletenessCounter {
 				count((Map<String, Object>)json.get(child.getName()), child);
 			} else if (child.getType().equals(Property.TYPE.OBJECTLIST)) {
 				countListOfObjects(json, child);
+			} else if (child.getType().equals(Property.TYPE.BOOLEANLIST)) {
+				countListOfBooleans(json, child);
 			} else if (child.getType().equals(Property.TYPE.LANGUAGEMAP)) {
 				countLanguageMap(json, child);
+			} else if (child.getType().equals(Property.TYPE.LANGUAGEMAPLIST)) {
+				countLanguageMapList(json, child);
 			}
 		}
 	}
@@ -57,9 +61,13 @@ public class CompletenessCounter {
 	private void countString(Map<String, Object> json, Property property) {
 		total++;
 		if (json.containsKey(property.getName())) {
-			String value = (String) json.get(property.getName());
-			if (StringUtils.isNotBlank(value))
+			if (!(json.get(property.getName()) instanceof String)) {
+				System.err.println(recordID + ") not String: " + property.getName() + ", " + json.get(property.getName()));
+			} else {
+				String value = (String) json.get(property.getName());
+				if (StringUtils.isNotBlank(value))
 					met++;
+			}
 		}
 	}
 
@@ -132,11 +140,15 @@ public class CompletenessCounter {
 		total++;
 		if (json.containsKey(property.getName())) {
 			total--;
-			List<String> values = (List<String>) json.get(property.getName());
-			for (String value : values) {
-				total++;
-				if (StringUtils.isNotBlank(value))
-					met++;
+			try {
+				List<String> values = (List<String>) json.get(property.getName());
+				for (String value : values) {
+					total++;
+					if (StringUtils.isNotBlank(value))
+						met++;
+				}
+			} catch (ClassCastException e) {
+				System.err.println(recordID + ") countListOfStrings: " + property.getName() + ", " + json.get(property.getName()));
 			}
 		}
 	}
@@ -152,20 +164,51 @@ public class CompletenessCounter {
 		}
 	}
 
-	private void countLanguageMap(Map<String, Object> json, Property property) {
+	private void countListOfBooleans(Map<String, Object> json, Property property) {
 		total++;
 		if (json.containsKey(property.getName())) {
 			total--;
-			Map<String, List<String>> values = (Map<String, List<String>>) json.get(property.getName());
-			for (String languageCode : values.keySet()) {
-				List<String> languageValues = values.get(languageCode);
-				for (String value : languageValues) {
-					total++;
-					if (StringUtils.isNotBlank(value))
-						met++;
-				}
+			List<Boolean> values = (List<Boolean>) json.get(property.getName());
+			for (Object value : values) {
+				count((Map<String, Object>)value, property);
 			}
 		}
 	}
 
+	private void countLanguageMap(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			total--;
+			try {
+				Map<String, List<String>> values = (Map<String, List<String>>) json.get(property.getName());
+				for (String languageCode : values.keySet()) {
+					List<String> languageValues = values.get(languageCode);
+					for (String value : languageValues) {
+						total++;
+						if (StringUtils.isNotBlank(value))
+							met++;
+					}
+				}
+			} catch (ClassCastException e) {
+				System.err.println(String.format("%s) %s @countLanguageMap: %s, %s", recordID, e.getLocalizedMessage(), property.getName(), json.get(property.getName())));
+			}
+		}
+	}
+
+	private void countLanguageMapList(Map<String, Object> json, Property property) {
+		total++;
+		if (json.containsKey(property.getName())) {
+			total--;
+			try {
+				List<Map<String, Object>> values = (List<Map<String, Object>>) json.get(property.getName());
+				for (Map<String, Object> value : values) {
+					countLanguageMap(value, property);
+				}
+			} catch (ClassCastException e) {
+				System.err.println(String.format("%s) %s @countLanguageMapList: %s, %s", recordID, e.getLocalizedMessage(), property.getName(), json.get(property.getName())));
+			}
+		}
+	}
+
+	
 }

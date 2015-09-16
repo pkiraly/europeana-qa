@@ -28,7 +28,7 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CompletenessCount {
+public class CompletenessApiCount {
 
 	public static class CompletenessMapper
 		extends Mapper<LongWritable, Text, Text, FloatWritable> {
@@ -41,9 +41,9 @@ public class CompletenessCount {
 				schema = new Schema(
 					Paths.get(
 						CompletenessMapper.class.getClassLoader()
-							.getResource("edm-schema.txt").toURI()));
+							.getResource("edm-schema-api.txt").toURI()));
 			} catch (URISyntaxException ex) {
-				Logger.getLogger(CompletenessCount.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(CompletenessApiCount.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 		/*
@@ -65,25 +65,12 @@ public class CompletenessCount {
 				});
 
 			if (record != null) {
-				String id = (String) record.get("about");
+				String id = (String) record.get("id");
 				String collectionId = ((List<String>) record.get("europeanaCollectionName")).get(0);
-				String dataProvider = collectionId;
-				if (record.containsKey("aggregations")) {
-					Map<String, Object> aggregation = (Map<String, Object>) ((List<Object>) record.get("aggregations")).get(0);
-					if (aggregation.containsKey("edmDataProvider")) {
-						Map<String, Object> edmDataProvider = (Map<String, Object>) aggregation.get("edmDataProvider");
-						if (edmDataProvider.containsKey("def")) {
-							List<String> dataProviders = (List<String>) edmDataProvider.get("def");
-							if (!dataProviders.isEmpty() && StringUtils.isNotBlank(dataProviders.get(0))) {
-								dataProvider = dataProviders.get(0);
-								if (dataProvider.contains(" / ")) {
-									dataProvider = dataProvider.substring(0, dataProvider.indexOf(" / "));
-								}
-								dataProvider = StringUtils.abbreviate(dataProvider, 30);
-							}
-						}
-					}
-				}
+				String dataProvider = record.containsKey("dataProvider") 
+					? StringUtils.abbreviate(((List<String>) record.get("dataProvider")).get(0), 30)
+					: collectionId;
+
 				CompletenessCounter counter = new CompletenessCounter(id);
 				counter.count(record, root);
 				// context.write(new Text(String.format("\"%s\",%s,%s", dataProvider, collectionId, id)), new FloatWritable(counter.getResult()));
@@ -122,7 +109,7 @@ public class CompletenessCount {
 		}
 
 		Job job = Job.getInstance(conf, "completeness count");
-		job.setJarByClass(CompletenessCount.class);
+		job.setJarByClass(CompletenessApiCount.class);
 		job.setMapperClass(CompletenessMapper.class);
 
 		/**
