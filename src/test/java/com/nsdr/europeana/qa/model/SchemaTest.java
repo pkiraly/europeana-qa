@@ -60,7 +60,7 @@ public class SchemaTest {
 
 	@Test
 	public void testFile() {
-		Path path = Paths.get("/home/kiru/git/europeana-qa/target/classes/edm-schema.txt");
+		Path path = Paths.get("target/classes/edm-schema.txt");
 		Schema schema = new Schema(path);
 		List<Property> topProperties = schema.getRoot().getChildren();
 		for (Property p : topProperties) {
