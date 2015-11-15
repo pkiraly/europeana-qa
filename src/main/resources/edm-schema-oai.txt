@@ -79,8 +79,8 @@ edm:Agent/skos:prefLabel;LM
 edm:Agent/skos:altLabel;LM
 edm:Agent/skos:hiddenLabel;LM
 edm:Agent/skos:note;LM
-edm:Agent/edm:begin;LM
-edm:Agent/edm:end;LM
+edm:Agent/edm:begin;SL
+edm:Agent/edm:end;SL
 edm:Agent/edm:wasPresentAt;SL
 edm:Agent/edm:hasMet;LM
 edm:Agent/edm:isRelatedTo;LM
@@ -117,7 +117,7 @@ edm:Place/skos:prefLabel;LM
 edm:Place/skos:altLabel;LM
 edm:Place/skos:hiddenLabel;LM
 edm:Place/skos:note;LM
-edm:Place/dcterms:isPartOf;LM
+edm:Place/dcterms:isPartOf;OL
 edm:Place/wgs84_pos:lat;D
 edm:Place/wgs84_pos:long;D
 edm:Place/wgs84_pos:alt;D
@@ -130,14 +130,14 @@ edm:TimeSpan/skos:prefLabel;LM
 edm:TimeSpan/skos:altLabel;LM
 edm:TimeSpan/skos:hiddenLabel;LM
 edm:TimeSpan/skos:note;LM
-edm:TimeSpan/edm:begin;LM
-edm:TimeSpan/edm:end;LM
-edm:TimeSpan/dcterms:isPartOf;LM
+edm:TimeSpan/edm:begin;SL
+edm:TimeSpan/edm:end;SL
+edm:TimeSpan/dcterms:isPartOf;OL
 edm:TimeSpan/dcterms:hasPart;LM
 edm:TimeSpan/owl:sameAs;SL
 
 ore:Proxy/@about;S
-ore:Proxy/dc:contributor;LM
+ore:Proxy/dc:contributor;SL
 ore:Proxy/dc:coverage;LM
 ore:Proxy/dc:creator;LM
 ore:Proxy/dc:date;LM
@@ -149,9 +149,9 @@ ore:Proxy/dc:publisher;LM
 ore:Proxy/dc:relation;LM
 ore:Proxy/dc:rights;SL
 ore:Proxy/dc:source;SL
-ore:Proxy/dc:subject;LM
+ore:Proxy/dc:subject;SL
 ore:Proxy/dc:title;SL
-ore:Proxy/dc:type;LM
+ore:Proxy/dc:type;SL
 ore:Proxy/dcterms:alternative;LM
 ore:Proxy/dcterms:conformsTo;LM
 ore:Proxy/dcterms:created;LM
@@ -160,7 +160,7 @@ ore:Proxy/dcterms:hasFormat;LM
 ore:Proxy/dcterms:hasPart;LM
 ore:Proxy/dcterms:hasVersion;LM
 ore:Proxy/dcterms:isFormatOf;LM
-ore:Proxy/dcterms:isPartOf;LM
+ore:Proxy/dcterms:isPartOf;OL
 ore:Proxy/dcterms:isReferencedBy;LM
 ore:Proxy/dcterms:isReplacedBy;LM
 ore:Proxy/dcterms:isRequiredBy;LM
@@ -203,4 +203,6 @@ edm:landingPage/@resource;S
 edm:rights/@resource;S
 ore:proxyFor/@resource;S
 ore:proxyIn/@resource;S
+dcterms:isPartOf/@resource;S
+
 # so this is the end my friend
