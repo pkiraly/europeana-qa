@@ -25,17 +25,17 @@ Usage
 
 6) Run Hadoop job
 
-    hadoop jar target/europeana-qa-1.0-SNAPSHOT.jar \
+    hadoop jar europeana-qa-1.0-SNAPSHOT.jar \
       com.nsdr.europeana.qa.hadoop.CompletenessCount \
       /europeana/europeana.json /europeana/output
 
 Where
 
-- haddop jar is the main Hadoop command  
-- target/europeana-qa-1.0-SNAPSHOT.jar is the Java jar file
-- com.nsdr.europeana.qa.hadoop.CompletenessCount is the Java class which do the calculation
-- /europeana/europeana.json is the input source containing the JSON records
-- /europeana/output is the target directory, where the output will be landed as part-r-00000 file (that's Hadoop default)
+- `haddop jar` is the main Hadoop command  
+- `europeana-qa-1.0-SNAPSHOT.jar` is the Java jar file
+- `com.nsdr.europeana.qa.hadoop.CompletenessCount` is the Java class which do the calculation
+- `/europeana/europeana.json` is the input source containing the JSON records
+- `/europeana/output` is the target directory, where the output will be landed as `part-r-00000` file (that's Hadoop default)
 
 Note: if you run it several time, before the next run you should remove the output directory by
 
