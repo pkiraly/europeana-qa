@@ -43,28 +43,53 @@ public class SchemaTest {
 		Schema schema = new Schema(properties);
 		List<Property> topProperties = schema.getRoot().getChildren();
 		for (Property p : topProperties) {
-			System.err.println(String.format("p: %s/%s::%s (%d)", p.getPath(), p.getName(), p.getType().toString(), p.getChildren().size()));
+			/*
+			System.err.println(
+				String.format("p: %s/%s::%s (%d)",
+					p.getPath(), p.getName(), p.getType().toString(), p.getChildren().size()));
+			*/
 		}
 	}
 
 	@Test
 	public void testResource() throws IOException, URISyntaxException {
 		ClassLoader classLoader = getClass().getClassLoader();
-		Path path = Paths.get(classLoader.getResource("edm-schema.txt").toURI());
+		Path path = Paths.get(classLoader.getResource("edm-schema-full.txt").toURI());
 		Schema schema = new Schema(path);
 		List<Property> topProperties = schema.getRoot().getChildren();
 		for (Property p : topProperties) {
-			System.err.println(String.format("p: %s/%s::%s (%d)", p.getPath(), p.getName(), p.getType().toString(), p.getChildren().size()));
+			/*
+			System.err.println(
+				String.format("p: %s/%s::%s (%d)",
+				p.getPath(), p.getName(), p.getType().toString(), p.getChildren().size()));
+			*/
+		}
+	}
+
+	@Test
+	public void testOaiResource() throws IOException, URISyntaxException {
+		ClassLoader classLoader = getClass().getClassLoader();
+		Path path = Paths.get(classLoader.getResource("edm-schema-oai.txt").toURI());
+		Schema schema = new Schema(path);
+		List<Property> topProperties = schema.getRoot().getChildren();
+		for (Property p : topProperties) {
+			/*
+			System.err.println(
+				String.format("p: %s/%s::%s (%d)", 
+				p.getPath(), p.getName(), p.getType().toString(), p.getChildren().size()));
+			*/
 		}
 	}
 
 	@Test
 	public void testFile() {
-		Path path = Paths.get("target/classes/edm-schema.txt");
+		Path path = Paths.get("target/classes/edm-schema-full.txt");
 		Schema schema = new Schema(path);
 		List<Property> topProperties = schema.getRoot().getChildren();
 		for (Property p : topProperties) {
+			/*
 			System.err.println(String.format("p: %s/%s::%s (%d)", p.getPath(), p.getName(), p.getType().toString(), p.getChildren().size()));
+			*/
 		}
 	}
 

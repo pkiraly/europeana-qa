@@ -3,15 +3,15 @@ package com.nsdr.europeana.qa.hadoop;
 import com.nsdr.europeana.qa.model.CompletenessCounter;
 import com.nsdr.europeana.qa.model.Schema;
 import com.nsdr.europeana.qa.model.Property;
+import com.nsdr.europeana.qa.metadata.Metadata;
+import com.nsdr.europeana.qa.metadata.europeana.FullRecordMetadata;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.lang.StringUtils;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -28,7 +28,7 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CompletenessApiCount {
+public class CompletenessCountForFullRecord {
 
 	public static class CompletenessMapper
 		extends Mapper<LongWritable, Text, Text, FloatWritable> {
@@ -39,42 +39,27 @@ public class CompletenessApiCount {
 			ClassLoader classLoader = CompletenessMapper.class.getClassLoader();
 			try {
 				schema = new Schema(
-					Paths.get(
-						CompletenessMapper.class.getClassLoader()
-							.getResource("edm-schema-api.txt").toURI()));
+					Paths.get(classLoader.getResource("edm-schema-full.txt").toURI()));
 			} catch (URISyntaxException ex) {
-				Logger.getLogger(CompletenessApiCount.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(CompletenessCountForFullRecord.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		/*
-		private final static List<String> properties = Arrays.asList(new String[]{
-			"timestamp_created_epoch", "europeanaAggregation",
-			"europeanaCollectionName:AS", "timespans", "about", "aggregations",
-			"places", "type", "concepts", "timestamp_created", "timestamp_update_epoch",
-			"providedCHOs", "title:AS", "year", "timestamp_update", "edmDatasetName:AS",
-			"europeanaCompleteness", "proxies", "europeanaAggregation/about"});
-		*/
 
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 
 			Property root = schema.getRoot();
-			Map<String, Object> record = mapper.readValue(value.toString(),
+			Map<String, Object> json = mapper.readValue(value.toString(),
 				new TypeReference<HashMap<String, Object>>() {
 				});
 
-			if (record != null) {
-				String id = (String) record.get("id");
-				String collectionId = ((List<String>) record.get("europeanaCollectionName")).get(0);
-				String dataProvider = record.containsKey("dataProvider") 
-					? StringUtils.abbreviate(((List<String>) record.get("dataProvider")).get(0), 30)
-					: collectionId;
-
-				CompletenessCounter counter = new CompletenessCounter(id);
-				counter.count(record, root);
-				// context.write(new Text(String.format("\"%s\",%s,%s", dataProvider, collectionId, id)), new FloatWritable(counter.getResult()));
-				context.write(new Text(String.format("\"%s\",%s", dataProvider, key)), new FloatWritable(counter.getResult()));
+			if (json != null) {
+				Metadata metadata = new FullRecordMetadata(json);
+				CompletenessCounter counter = new CompletenessCounter(metadata.getId());
+				counter.count(json, root);
+				context.write(new Text(String.format("\"%s\",%s", metadata.getDataProvider(), key)),
+					new FloatWritable(counter.getResult()));
 			} else {
 				System.err.println("record length: " + value.toString().length());
 				System.err.println("record: " + value.toString());
@@ -109,7 +94,7 @@ public class CompletenessApiCount {
 		}
 
 		Job job = Job.getInstance(conf, "completeness count");
-		job.setJarByClass(CompletenessApiCount.class);
+		job.setJarByClass(CompletenessCountForFullRecord.class);
 		job.setMapperClass(CompletenessMapper.class);
 
 		/**

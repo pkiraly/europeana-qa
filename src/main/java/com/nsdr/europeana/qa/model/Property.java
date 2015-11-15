@@ -85,4 +85,9 @@ public class Property {
 					&& parent.equals(other.getParent())))
 			&& children.equals(other.getChildren()));
 	}
+
+	@Override
+	public String toString() {
+		return String.format("name: %s, path: %s, type: %s", name, path, type);
+	}
 }

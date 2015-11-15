@@ -27,9 +27,9 @@ class PropertyFactory {
 				}
 			}
 		}
-		if (name.contains(":")) {
+		if (name.contains(";")) {
 			String[] parts;
-			parts = name.split(":");
+			parts = name.split(";");
 			name = parts[0];
 			type = resolveTypeAbbreviation(parts[1]);
 		}

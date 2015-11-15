@@ -64,9 +64,11 @@ public class Schema {
 			}
 
 			parent.addChild(p);
-			if (properties.get(p.getName()) != null && !properties.get(p.getName()).getType().equals(p.getType())) {
+			if (properties.get(p.getName()) != null &&
+					!properties.get(p.getName()).getType().equals(p.getType())) {
 				Property x = properties.get(p.getName());
-				System.err.println(String.format("key exists: %s/%s | %s vs %s", p.getPath(), p.getName(), p.getType(), x.getType()));
+				System.err.println(String.format("key exists: %s/%s | %s vs %s", 
+					p.getPath(), p.getName(), p.getType(), x.getType()));
 			}
 			properties.put(p.getName(), p);
 		}

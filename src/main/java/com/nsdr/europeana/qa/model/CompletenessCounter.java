@@ -168,9 +168,13 @@ public class CompletenessCounter {
 		total++;
 		if (json.containsKey(property.getName())) {
 			total--;
-			List<Boolean> values = (List<Boolean>) json.get(property.getName());
-			for (Object value : values) {
-				count((Map<String, Object>)value, property);
+			try {
+				List<Boolean> values = (List<Boolean>) json.get(property.getName());
+				for (Object value : values) {
+					count((Map<String, Object>)value, property);
+				}
+			} catch (ClassCastException e) {
+				System.err.println(recordID + ") countListOfBooleans: " + property.getName() + ", " + json.get(property.getName()));
 			}
 		}
 	}

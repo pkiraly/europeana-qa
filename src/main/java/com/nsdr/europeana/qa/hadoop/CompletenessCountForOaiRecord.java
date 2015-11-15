@@ -3,15 +3,15 @@ package com.nsdr.europeana.qa.hadoop;
 import com.nsdr.europeana.qa.model.CompletenessCounter;
 import com.nsdr.europeana.qa.model.Schema;
 import com.nsdr.europeana.qa.model.Property;
+import com.nsdr.europeana.qa.metadata.Metadata;
+import com.nsdr.europeana.qa.metadata.europeana.OaiRecordMetadata;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.lang.StringUtils;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -28,7 +28,7 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CompletenessCount {
+public class CompletenessCountForOaiRecord {
 
 	public static class CompletenessMapper
 		extends Mapper<LongWritable, Text, Text, FloatWritable> {
@@ -39,55 +39,27 @@ public class CompletenessCount {
 			ClassLoader classLoader = CompletenessMapper.class.getClassLoader();
 			try {
 				schema = new Schema(
-					Paths.get(
-						CompletenessMapper.class.getClassLoader()
-							.getResource("edm-schema.txt").toURI()));
+					Paths.get(classLoader.getResource("edm-schema-oai.txt").toURI()));
 			} catch (URISyntaxException ex) {
-				Logger.getLogger(CompletenessCount.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(CompletenessCountForOaiRecord.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		/*
-		private final static List<String> properties = Arrays.asList(new String[]{
-			"timestamp_created_epoch", "europeanaAggregation",
-			"europeanaCollectionName:AS", "timespans", "about", "aggregations",
-			"places", "type", "concepts", "timestamp_created", "timestamp_update_epoch",
-			"providedCHOs", "title:AS", "year", "timestamp_update", "edmDatasetName:AS",
-			"europeanaCompleteness", "proxies", "europeanaAggregation/about"});
-		*/
 
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
 
 			Property root = schema.getRoot();
-			Map<String, Object> record = mapper.readValue(value.toString(),
+			Map<String, Object> json = mapper.readValue(value.toString(),
 				new TypeReference<HashMap<String, Object>>() {
 				});
 
-			if (record != null) {
-				String id = (String) record.get("about");
-				String collectionId = ((List<String>) record.get("europeanaCollectionName")).get(0);
-				String dataProvider = collectionId;
-				if (record.containsKey("aggregations")) {
-					Map<String, Object> aggregation = (Map<String, Object>) ((List<Object>) record.get("aggregations")).get(0);
-					if (aggregation.containsKey("edmDataProvider")) {
-						Map<String, Object> edmDataProvider = (Map<String, Object>) aggregation.get("edmDataProvider");
-						if (edmDataProvider.containsKey("def")) {
-							List<String> dataProviders = (List<String>) edmDataProvider.get("def");
-							if (!dataProviders.isEmpty() && StringUtils.isNotBlank(dataProviders.get(0))) {
-								dataProvider = dataProviders.get(0);
-								if (dataProvider.contains(" / ")) {
-									dataProvider = dataProvider.substring(0, dataProvider.indexOf(" / "));
-								}
-								dataProvider = StringUtils.abbreviate(dataProvider, 30);
-							}
-						}
-					}
-				}
-				CompletenessCounter counter = new CompletenessCounter(id);
-				counter.count(record, root);
-				// context.write(new Text(String.format("\"%s\",%s,%s", dataProvider, collectionId, id)), new FloatWritable(counter.getResult()));
-				context.write(new Text(String.format("\"%s\",%s", dataProvider, key)), new FloatWritable(counter.getResult()));
+			if (json != null) {
+				Metadata metadata = new OaiRecordMetadata(json);
+				CompletenessCounter counter = new CompletenessCounter(metadata.getId());
+				counter.count(json, root);
+				context.write(new Text(String.format("\"%s\",%s", metadata.getDataProvider(), key)),
+					new FloatWritable(counter.getResult()));
 			} else {
 				System.err.println("record length: " + value.toString().length());
 				System.err.println("record: " + value.toString());
@@ -122,7 +94,7 @@ public class CompletenessCount {
 		}
 
 		Job job = Job.getInstance(conf, "completeness count");
-		job.setJarByClass(CompletenessCount.class);
+		job.setJarByClass(CompletenessCountForOaiRecord.class);
 		job.setMapperClass(CompletenessMapper.class);
 
 		/**
