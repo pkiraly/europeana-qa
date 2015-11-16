@@ -25,8 +25,16 @@ Usage
 
 6) Run Hadoop job
 
+Right now we have three Hadoop jobs, as there are three different sources: the API's search results, the API's full record results, and the OAI-PMH result. The classes for analysis of these results are
+
+* com.nsdr.europeana.qa.hadoop.CompletenessCountForFullRecord
+* com.nsdr.europeana.qa.hadoop.CompletenessCountForSearchRecord
+* com.nsdr.europeana.qa.hadoop.CompletenessCountForOaiRecord
+
+To run Hadoop you should give the appropriate class, for example:
+
     hadoop jar europeana-qa-1.0-SNAPSHOT.jar \
-      com.nsdr.europeana.qa.hadoop.CompletenessCount \
+      com.nsdr.europeana.qa.hadoop.CompletenessCountForFullRecord \
       /europeana/europeana.json /europeana/output
 
 Where
