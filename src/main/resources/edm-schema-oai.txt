@@ -83,7 +83,7 @@ edm:Agent/edm:begin;SL
 edm:Agent/edm:end;SL
 edm:Agent/edm:wasPresentAt;SL
 edm:Agent/edm:hasMet;LM
-edm:Agent/edm:isRelatedTo;LM
+edm:Agent/edm:isRelatedTo;RL
 edm:Agent/owl:sameAs;RL
 edm:Agent/foaf:name;LM
 edm:Agent/dc:date;LL
@@ -180,7 +180,7 @@ ore:Proxy/edm:hasType;LM
 ore:Proxy/edm:incorporates;SL
 ore:Proxy/edm:isDerivativeOf;SL
 ore:Proxy/edm:isNextInSequence;S
-ore:Proxy/edm:isRelatedTo;LM
+ore:Proxy/edm:isRelatedTo;RL
 ore:Proxy/edm:isRepresentationOf;S
 ore:Proxy/edm:isSimilarTo;SL
 ore:Proxy/edm:isSuccessorOf;SL
