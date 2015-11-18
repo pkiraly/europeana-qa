@@ -85,8 +85,8 @@ public class OaiCounterTest {
 		}
 	}
 
-	@Test
-	public void testCounter2() throws URISyntaxException, IOException {
+	// @Test
+	public void testCounterWithLocalFile() throws URISyntaxException, IOException {
 		Property root = schema.getRoot();
 		Path path = Paths.get("/home/kiru/git/europeana-oai-pmh-client/europeana.json");
 		List<String> lines = Files.readAllLines(path, Charset.defaultCharset());
