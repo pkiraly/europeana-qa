@@ -137,8 +137,8 @@ edm:TimeSpan/dcterms:hasPart;LL
 edm:TimeSpan/owl:sameAs;SL
 
 ore:Proxy/@about;S
-ore:Proxy/dc:contributor;SL
-ore:Proxy/dc:coverage;LM
+ore:Proxy/dc:contributor;LL
+ore:Proxy/dc:coverage;RL
 ore:Proxy/dc:creator;SL
 ore:Proxy/dc:date;LL
 ore:Proxy/dc:description;SL
@@ -167,7 +167,7 @@ ore:Proxy/dcterms:isRequiredBy;LM
 ore:Proxy/dcterms:issued;LL
 ore:Proxy/dcterms:isVersionOf;LM
 ore:Proxy/dcterms:medium;LL
-ore:Proxy/dcterms:provenance;LM
+ore:Proxy/dcterms:provenance;LL
 ore:Proxy/dcterms:references;LM
 ore:Proxy/dcterms:replaces;LM
 ore:Proxy/dcterms:requires;LM
