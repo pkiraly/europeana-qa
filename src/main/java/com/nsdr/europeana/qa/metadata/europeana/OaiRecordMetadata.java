@@ -46,8 +46,14 @@ public class OaiRecordMetadata implements Metadata {
 								dataProvider = StringUtils.abbreviate(dataProvider, 30);
 							}
 						} else {
-							System.err.println("getDataProvider: dataProviders is not a String, but "
-								+ dataProviders.get(0).getClass().getCanonicalName() + " value: " + dataProviders.get(0));
+							try {
+								System.err.println("getDataProvider: dataProviders is not a String, but "
+									+ dataProviders.get(0).getClass().getCanonicalName() 
+									+ " value: " + dataProviders.get(0));
+							} catch (ClassCastException e) {
+								System.err.println(e.getLocalizedMessage());
+								e.printStackTrace(System.err);
+							}
 						}
 					}
 				}
