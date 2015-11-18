@@ -11,13 +11,14 @@ public class Property {
 
 	enum TYPE {
 		STRING, STRINGLIST, OBJECT, OBJECTLIST, BOOLEAN, BOOLEANLIST, 
-		LANGUAGEMAP, LANGUAGEMAPLIST, INTEGER, FLOAT, DOUBLE, LONG
+		LANGUAGEMAP, LANGUAGEMAPLIST, INTEGER, FLOAT, DOUBLE, LONG,
+		RESOURCELIST, LANGUAGELIST
 	};
 
 	private String name;
 	private String path;
 	private Property parent = null;
-	private List<Property> children = new ArrayList<Property>();
+	private List<Property> children = new ArrayList<>();
 	private TYPE type = TYPE.STRING;
 
 	public Property(String name) {

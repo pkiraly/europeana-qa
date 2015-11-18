@@ -1,7 +1,6 @@
 package com.nsdr.europeana.qa.metadata.europeana;
 
 import com.nsdr.europeana.qa.metadata.Metadata;
-import com.nsdr.europeana.qa.metadata.europeana.OaiRecordMetadata;
 import com.nsdr.europeana.qa.hadoop.CompletenessCountForOaiRecord;
 import com.nsdr.europeana.qa.model.CompletenessCounter;
 import com.nsdr.europeana.qa.model.Property;
@@ -71,6 +70,25 @@ public class OaiCounterTest {
 	public void testCounter() throws URISyntaxException, IOException {
 		Property root = schema.getRoot();
 		Path path = Paths.get(getClass().getResource("/europeana-oai.json").toURI());
+		List<String> lines = Files.readAllLines(path, Charset.defaultCharset());
+		int i = 0;
+		for (String line : lines) {
+			Map<String, Object> record = mapper.readValue(line,
+				new TypeReference<HashMap<String, Object>>() {
+				});
+			Metadata oaiRecord = new OaiRecordMetadata(record);
+			CompletenessCounter counter = new CompletenessCounter(oaiRecord.getId());
+			counter.count(record, root);
+			assertNotNull(counter.getResult());
+			if (++i == 100)
+				break;
+		}
+	}
+
+	@Test
+	public void testCounter2() throws URISyntaxException, IOException {
+		Property root = schema.getRoot();
+		Path path = Paths.get("/home/kiru/git/europeana-oai-pmh-client/europeana.json");
 		List<String> lines = Files.readAllLines(path, Charset.defaultCharset());
 		for (String line : lines) {
 			Map<String, Object> record = mapper.readValue(line,

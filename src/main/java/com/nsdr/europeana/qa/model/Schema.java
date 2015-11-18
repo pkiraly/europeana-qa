@@ -1,12 +1,9 @@
 package com.nsdr.europeana.qa.model;
 
-import com.nsdr.europeana.qa.model.Property;
-import com.nsdr.europeana.qa.model.PropertyFactory;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,13 +36,13 @@ public class Schema {
 			Logger.getLogger(Schema.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		if (lines != null) {
-			List<String> properties = new ArrayList<>();
+			List<String> props = new ArrayList<>();
 			for (String line : lines) {
 				if (StringUtils.isNotBlank(line) && !StringUtils.startsWith(line, "#")) {
-					properties.add(line);
+					props.add(line);
 				}
 			}
-			build(properties);
+			build(props);
 		}
 	}
 
@@ -76,5 +73,9 @@ public class Schema {
 
 	public Property getRoot() {
 		return properties.get("root");
+	}
+
+	public Property getProperty(String name) {
+		return properties.get(name);
 	}
 }

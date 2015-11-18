@@ -1,8 +1,5 @@
 package com.nsdr.europeana.qa.model;
 
-import com.nsdr.europeana.qa.model.Property;
-import java.util.List;
-
 /**
  *
  * @author Péter Király <peter.kiraly at gwdg.de>
@@ -27,12 +24,14 @@ class PropertyFactory {
 				}
 			}
 		}
+
 		if (name.contains(";")) {
 			String[] parts;
 			parts = name.split(";");
 			name = parts[0];
 			type = resolveTypeAbbreviation(parts[1]);
 		}
+
 		Property prop = new Property(name);
 		prop.setType(Property.TYPE.valueOf(type));
 		prop.setPath(parent);
@@ -53,6 +52,8 @@ class PropertyFactory {
 			case "OL": type = "OBJECTLIST"; break;
 			case "LM": type = "LANGUAGEMAP"; break;
 			case "LML":type = "LANGUAGEMAPLIST"; break;
+			case "LL": type = "LANGUAGELIST"; break;
+			case "RL": type = "RESOURCELIST"; break;
 			case "S":
 			default:   type = "STRING"; break;
 		}
