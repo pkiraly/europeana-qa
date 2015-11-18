@@ -88,13 +88,13 @@ edm:Agent/owl:sameAs;SL
 edm:Agent/foaf:name;LM
 edm:Agent/dc:date;LL
 edm:Agent/dc:identifier;SL
-edm:Agent/rdaGr2:dateOfBirth;LM
-edm:Agent/rdaGr2:dateOfDeath;LM
+edm:Agent/rdaGr2:dateOfBirth;LL
+edm:Agent/rdaGr2:dateOfDeath;LL
 edm:Agent/rdaGr2:dateOfEstablishment;LM
 edm:Agent/rdaGr2:dateOfTermination;LM
 edm:Agent/rdaGr2:gender;LM
-edm:Agent/rdaGr2:professionOrOccupation;LM
-edm:Agent/rdaGr2:biographicalInformation;LM
+edm:Agent/rdaGr2:professionOrOccupation;RL
+edm:Agent/rdaGr2:biographicalInformation;LL
 
 skos:Concept/@about;S
 skos:Concept/skos:prefLabel;LL
