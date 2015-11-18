@@ -36,7 +36,7 @@ ore:Aggregation/edm:isShownAt;OL
 ore:Aggregation/edm:object;OL
 ore:Aggregation/edm:provider;SL
 ore:Aggregation/edm:rights;OL
-ore:Aggregation/edm:ugc;S
+ore:Aggregation/edm:ugc;SL
 ore:Aggregation/dc:rights;RL
 ore:Aggregation/edm:hasView;SL
 ore:Aggregation/edm:aggregatedCHO;OL
