@@ -48,7 +48,7 @@ edm:EuropeanaAggregation/@about;S
 edm:EuropeanaAggregation/edm:WebResource;OL
 edm:EuropeanaAggregation/edm:aggregatedCHO;OL
 edm:EuropeanaAggregation/ore:aggregates;SL
-edm:EuropeanaAggregation/dc:creator;SL
+edm:EuropeanaAggregation/dc:creator;RL
 edm:EuropeanaAggregation/edm:landingPage;OL
 edm:EuropeanaAggregation/edm:isShownBy;OL
 edm:EuropeanaAggregation/edm:hasView;SL
@@ -58,7 +58,7 @@ edm:EuropeanaAggregation/edm:rights;OL
 # edm:EuropeanaAggregation/edmPreview;S
 
 edm:ProvidedCHO/@about;S
-edm:ProvidedCHO/owl:sameAs;SL
+edm:ProvidedCHO/owl:sameAs;RL
 
 edm:WebResource/@about;S
 edm:WebResource/webResourceDcRights;LM
@@ -84,7 +84,7 @@ edm:Agent/edm:end;SL
 edm:Agent/edm:wasPresentAt;SL
 edm:Agent/edm:hasMet;LM
 edm:Agent/edm:isRelatedTo;LM
-edm:Agent/owl:sameAs;SL
+edm:Agent/owl:sameAs;RL
 edm:Agent/foaf:name;LM
 edm:Agent/dc:date;LL
 edm:Agent/dc:identifier;SL
@@ -123,7 +123,7 @@ edm:Place/wgs84_pos:long;D
 edm:Place/wgs84_pos:alt;D
 #edm:Place/position;O
 edm:Place/dcterms:hasPart;LL
-edm:Place/owl:sameAs;SL
+edm:Place/owl:sameAs;RL
 
 edm:TimeSpan/@about;S
 edm:TimeSpan/skos:prefLabel;LL
@@ -134,12 +134,12 @@ edm:TimeSpan/edm:begin;SL
 edm:TimeSpan/edm:end;SL
 edm:TimeSpan/dcterms:isPartOf;RL
 edm:TimeSpan/dcterms:hasPart;LL
-edm:TimeSpan/owl:sameAs;SL
+edm:TimeSpan/owl:sameAs;RL
 
 ore:Proxy/@about;S
 ore:Proxy/dc:contributor;LL
 ore:Proxy/dc:coverage;RL
-ore:Proxy/dc:creator;SL
+ore:Proxy/dc:creator;RL
 ore:Proxy/dc:date;LL
 ore:Proxy/dc:description;SL
 ore:Proxy/dc:format;SL
