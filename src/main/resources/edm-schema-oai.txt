@@ -87,7 +87,7 @@ edm:Agent/edm:isRelatedTo;RL
 edm:Agent/owl:sameAs;RL
 edm:Agent/foaf:name;LM
 edm:Agent/dc:date;LL
-edm:Agent/dc:identifier;SL
+edm:Agent/dc:identifier;LL
 edm:Agent/rdaGr2:dateOfBirth;LL
 edm:Agent/rdaGr2:dateOfDeath;LL
 edm:Agent/rdaGr2:dateOfEstablishment;LM
@@ -143,7 +143,7 @@ ore:Proxy/dc:creator;RL
 ore:Proxy/dc:date;LL
 ore:Proxy/dc:description;RL
 ore:Proxy/dc:format;LL
-ore:Proxy/dc:identifier;SL
+ore:Proxy/dc:identifier;LL
 ore:Proxy/dc:language;SL
 ore:Proxy/dc:publisher;RL
 ore:Proxy/dc:relation;LL

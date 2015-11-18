@@ -36,12 +36,19 @@ public class OaiRecordMetadata implements Metadata {
 				Map<String, Object> aggregation = (Map<String, Object>) ((List<Object>) json.get("ore:Aggregation")).get(0);
 				if (aggregation.containsKey("edm:dataProvider")) {
 					List<String> dataProviders = ((List<String>) aggregation.get("edm:dataProvider"));
-					if (!dataProviders.isEmpty() && StringUtils.isNotBlank(dataProviders.get(0))) {
-						dataProvider = dataProviders.get(0);
-						if (dataProvider.contains(" / ")) {
-							dataProvider = dataProvider.substring(0, dataProvider.indexOf(" / "));
+					if (!dataProviders.isEmpty()) {
+						if (dataProviders.get(0) instanceof String) {
+							if (StringUtils.isNotBlank(dataProviders.get(0))) {
+								dataProvider = dataProviders.get(0);
+								if (dataProvider.contains(" / ")) {
+									dataProvider = dataProvider.substring(0, dataProvider.indexOf(" / "));
+								}
+								dataProvider = StringUtils.abbreviate(dataProvider, 30);
+							}
+						} else {
+							System.err.println("getDataProvider: dataProviders is not a String, but "
+								+ dataProviders.get(0).getClass().getCanonicalName() + " value: " + dataProviders.get(0));
 						}
-						dataProvider = StringUtils.abbreviate(dataProvider, 30);
 					}
 				}
 			}
