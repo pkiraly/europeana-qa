@@ -68,7 +68,7 @@ edm:WebResource/dc:format;SL
 edm:WebResource/dc:source;SL
 edm:WebResource/dcterms:extent;SL
 edm:WebResource/dcterms:issued;LL
-edm:WebResource/dcterms:conformsTo;LM
+edm:WebResource/dcterms:conformsTo;LL
 edm:WebResource/dcterms:created;SL
 edm:WebResource/dcterms:isFormatOf;LM
 edm:WebResource/dcterms:hasPart;LL
@@ -153,12 +153,12 @@ ore:Proxy/dc:subject;RL
 ore:Proxy/dc:title;SL
 ore:Proxy/dc:type;RL
 ore:Proxy/dcterms:alternative;LL
-ore:Proxy/dcterms:conformsTo;LM
+ore:Proxy/dcterms:conformsTo;LL
 ore:Proxy/dcterms:created;SL
 ore:Proxy/dcterms:extent;SL
-ore:Proxy/dcterms:hasFormat;LM
+ore:Proxy/dcterms:hasFormat;LL
 ore:Proxy/dcterms:hasPart;LL
-ore:Proxy/dcterms:hasVersion;LM
+ore:Proxy/dcterms:hasVersion;LL
 ore:Proxy/dcterms:isFormatOf;LM
 ore:Proxy/dcterms:isPartOf;RL
 ore:Proxy/dcterms:isReferencedBy;RL
