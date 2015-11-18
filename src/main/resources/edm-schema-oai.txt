@@ -38,20 +38,20 @@ ore:Aggregation/edm:provider;SL
 ore:Aggregation/edm:rights;OL
 ore:Aggregation/edm:ugc;SL
 ore:Aggregation/dc:rights;RL
-ore:Aggregation/edm:hasView;SL
+ore:Aggregation/edm:hasView;RL
 ore:Aggregation/edm:aggregatedCHO;OL
-ore:Aggregation/ore:aggregates;SL
+ore:Aggregation/ore:aggregates;RL
 ore:Aggregation/edm:WebResource;OL
 # ore:Aggregation/edmUnstored;SL
 
 edm:EuropeanaAggregation/@about;S
 edm:EuropeanaAggregation/edm:WebResource;OL
 edm:EuropeanaAggregation/edm:aggregatedCHO;OL
-edm:EuropeanaAggregation/ore:aggregates;SL
+edm:EuropeanaAggregation/ore:aggregates;RL
 edm:EuropeanaAggregation/dc:creator;RL
 edm:EuropeanaAggregation/edm:landingPage;OL
 edm:EuropeanaAggregation/edm:isShownBy;OL
-edm:EuropeanaAggregation/edm:hasView;SL
+edm:EuropeanaAggregation/edm:hasView;RL
 edm:EuropeanaAggregation/edm:country;SL
 edm:EuropeanaAggregation/edm:language;SL
 edm:EuropeanaAggregation/edm:rights;OL
@@ -69,7 +69,7 @@ edm:WebResource/dc:source;LL
 edm:WebResource/dcterms:extent;LL
 edm:WebResource/dcterms:issued;LL
 edm:WebResource/dcterms:conformsTo;LL
-edm:WebResource/dcterms:created;SL
+edm:WebResource/dcterms:created;LL
 edm:WebResource/dcterms:isFormatOf;LL
 edm:WebResource/dcterms:hasPart;LL
 edm:WebResource/edm:isNextInSequence;S
@@ -144,7 +144,7 @@ ore:Proxy/dc:date;LL
 ore:Proxy/dc:description;RL
 ore:Proxy/dc:format;LL
 ore:Proxy/dc:identifier;LL
-ore:Proxy/dc:language;SL
+ore:Proxy/dc:language;LL
 ore:Proxy/dc:publisher;RL
 ore:Proxy/dc:relation;LL
 ore:Proxy/dc:rights;RL
@@ -154,7 +154,7 @@ ore:Proxy/dc:title;LL
 ore:Proxy/dc:type;RL
 ore:Proxy/dcterms:alternative;LL
 ore:Proxy/dcterms:conformsTo;LL
-ore:Proxy/dcterms:created;SL
+ore:Proxy/dcterms:created;LL
 ore:Proxy/dcterms:extent;LL
 ore:Proxy/dcterms:hasFormat;LL
 ore:Proxy/dcterms:hasPart;LL
