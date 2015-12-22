@@ -1,0 +1,32 @@
+{
+    "root": {
+        "type": "OBJECT",
+        "elements": [
+            {"name": "identifier", "type": "STRING"},
+            {"name": "qIdentifier", "type": "STRING"},
+            {"name": "sets", "type": "ARRAY"},
+            {"name": "edm:ProvidedCHO", "type": "ARRAY"},
+            {"name": "edm:WebResource", "type": "ARRAY"},
+            {"name": "ore:Aggregation", "type": "ARRAY"},
+            {"name": "ore:Proxy", "type": "ARRAY"},
+            {"name": "edm:EuropeanaAggregation", "type": "ARRAY"},
+            {"name": "edm:Agent", "type": "ARRAY"},
+            {"name": "skos:Concept", "type": "ARRAY"},
+            {"name": "edm:Place", "type": "ARRAY"},
+            {"name": "edm:TimeSpan", "type": "ARRAY"}
+        ]
+    },
+    "identifier": {"type": "STRING"},
+    "qIdentifier": {"type": "STRING"},
+    "sets": {"type": "STRING"},
+    "edm:ProvidedCHO": {"type": "OBJECT"},
+
+    "edm:WebResource": {"type": "OBJECT"},
+    "ore:Aggregation": {"type": "OBJECT"},
+    "ore:Proxy": {"type": "OBJECT"},
+    "edm:EuropeanaAggregation": {"type": "OBJECT"},
+    "edm:Agent": {"type": "OBJECT"},
+    "skos:Concept": {"type": "OBJECT"},
+    "edm:Place": {"type": "OBJECT"},
+    "edm:TimeSpan": {"type": "OBJECT"}
+}

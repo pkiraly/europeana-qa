@@ -43,7 +43,8 @@ public class OaiRecordMetadata implements Metadata {
 								if (dataProvider.contains(" / ")) {
 									dataProvider = dataProvider.substring(0, dataProvider.indexOf(" / "));
 								}
-								dataProvider = StringUtils.abbreviate(dataProvider, 30);
+								dataProvider = StringUtils.abbreviate(dataProvider, 30)
+									.replace("\"", "");
 							}
 						} else {
 							try {

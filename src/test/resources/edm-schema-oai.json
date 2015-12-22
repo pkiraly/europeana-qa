@@ -1,0 +1,22 @@
+{
+    "root": {
+        "identifier": {
+            "type": "String"
+        },
+        "qIdentifier": {
+            "type": "String"
+        },
+        "sets": {
+            "type": "String",
+            "cardinality": "+"
+        },
+        "edm:ProvidedCHO": {
+            "type": "edm:ProvidedCHO",
+            "cardinality": "+"
+        }
+    },
+    "edm:ProvidedCHO": {
+        "type": "String",
+        "cardinality": "+"
+    }
+}
