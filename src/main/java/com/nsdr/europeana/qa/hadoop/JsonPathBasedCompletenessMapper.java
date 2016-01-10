@@ -6,6 +6,8 @@ import com.nsdr.europeana.qa.model.JsonPathBasedCompletenessCounter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -22,6 +24,7 @@ public class JsonPathBasedCompletenessMapper extends Mapper<LongWritable, Text, 
 
 	private final ObjectMapper mapper = new ObjectMapper(new JsonFactory());
 	private final boolean withLabel;
+	public static Logger log = Logger.getLogger(JsonPathBasedCompletenessMapper.class.getCanonicalName());
 
 	public JsonPathBasedCompletenessMapper() {
 		this(false);
@@ -41,8 +44,8 @@ public class JsonPathBasedCompletenessMapper extends Mapper<LongWritable, Text, 
 				new TypeReference<HashMap<String, Object>>() {
 				});
 		} catch (JsonParseException e) {
-			System.err.println("exception: " + e.getLocalizedMessage());
-			System.err.println("record: " + value.toString());
+			log.log(Level.SEVERE, "exception: {0}", e.getLocalizedMessage());
+			log.log(Level.SEVERE, "record: {0}", value.toString());
 		}
 
 		if (json != null) {
