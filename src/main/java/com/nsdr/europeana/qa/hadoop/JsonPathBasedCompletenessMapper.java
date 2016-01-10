@@ -10,6 +10,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -34,9 +35,15 @@ public class JsonPathBasedCompletenessMapper extends Mapper<LongWritable, Text, 
 	public void map(LongWritable key, Text value, Mapper.Context context)
 		throws IOException, InterruptedException {
 
-		Map<String, Object> json = mapper.readValue(value.toString(),
-			new TypeReference<HashMap<String, Object>>() {
-			});
+		Map<String, Object> json = null;
+		try {
+			json = mapper.readValue(value.toString(),
+				new TypeReference<HashMap<String, Object>>() {
+				});
+		} catch (JsonParseException e) {
+			System.err.println("exception: " + e.getLocalizedMessage());
+			System.err.println("record: " + value.toString());
+		}
 
 		if (json != null) {
 			Metadata metadata = new OaiRecordMetadata(json);
