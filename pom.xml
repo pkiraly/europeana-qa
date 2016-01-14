@@ -80,6 +80,16 @@
                 <version>2.6</version>
                 <configuration>
                     <outputDirectory>${basedir}</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.nsdr.europeana.qa.cli.Counter</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
             <plugin>
@@ -87,7 +97,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass></mainClass>
+                            <mainClass>com.nsdr.europeana.qa.cli.Counter</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

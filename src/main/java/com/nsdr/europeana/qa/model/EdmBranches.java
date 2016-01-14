@@ -13,7 +13,7 @@ public class EdmBranches {
 	private final static List<JsonBranch> paths = new ArrayList<>();
 
 	static {
-		paths.add(new JsonBranch("@about",
+		paths.add(new JsonBranch("edm:ProvidedCHO/@about",
 			"$.['edm:ProvidedCHO'][0]['@about']",
 			JsonBranch.Category.MANDATORY));
 		paths.add(new JsonBranch("Proxy/dc:title",

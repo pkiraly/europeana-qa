@@ -22,9 +22,10 @@ import org.codehaus.jackson.type.TypeReference;
  */
 public class JsonPathBasedCompletenessMapper extends Mapper<LongWritable, Text, Text, Text> {
 
+	public static final Logger log = Logger.getLogger(JsonPathBasedCompletenessMapper.class.getCanonicalName());
+
 	private final ObjectMapper mapper = new ObjectMapper(new JsonFactory());
 	private final boolean withLabel;
-	public static Logger log = Logger.getLogger(JsonPathBasedCompletenessMapper.class.getCanonicalName());
 
 	public JsonPathBasedCompletenessMapper() {
 		this(false);

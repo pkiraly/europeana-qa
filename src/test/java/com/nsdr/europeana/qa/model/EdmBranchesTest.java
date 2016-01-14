@@ -42,7 +42,7 @@ public class EdmBranchesTest {
 		assertEquals(36, paths.size());
 		JsonBranch firstPath = paths.get(0);
 		assertNotNull(firstPath);
-		assertEquals("@about", firstPath.getLabel());
+		assertEquals("edm:ProvidedCHO/@about", firstPath.getLabel());
 		assertEquals("$.['edm:ProvidedCHO'][0]['@about']", firstPath.getJsonPath());
 		assertFalse(firstPath.getCategories().isEmpty());
 		assertEquals(1, firstPath.getCategories().size());
