@@ -72,9 +72,9 @@ public class JsonPathBasedCompletenessCounterTest {
 		counter.setVerbose(true);
 		for (String line : lines) {
 			counter.count(line);
-			assertEquals(new HashSet<String>(existing), new HashSet<String>(counter.getExistingFields()));
-			assertEquals(new HashSet<String>(missing), new HashSet<String>(counter.getMissingFields()));
-			assertEquals(new HashSet<String>(empty), new HashSet<String>(counter.getEmptyFields()));
+			assertEquals(new HashSet<>(existing), new HashSet<>(counter.getExistingFields()));
+			assertEquals(new HashSet<>(missing), new HashSet<>(counter.getMissingFields()));
+			assertEquals(new HashSet<>(empty), new HashSet<>(counter.getEmptyFields()));
 		}
 	}
 

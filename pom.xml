@@ -37,6 +37,11 @@
             <classifier>hadoop2</classifier>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+        </dependency>
         <!-- JSON processing JSR 353: Java API for JSON Processing (https://jsonp.java.net/) -->
         <dependency>
             <groupId>javax.json</groupId>
@@ -84,7 +89,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.nsdr.europeana.qa.cli.Counter</mainClass>
+                            <mainClass></mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -97,7 +102,8 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.nsdr.europeana.qa.cli.Counter</mainClass>
+                            <!-- com.nsdr.europeana.qa.cli.Counter -->
+                            <mainClass></mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
